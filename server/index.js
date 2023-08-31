@@ -34,7 +34,11 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ storage }).single('file');
+const uploadMiddleware = multer({ storage }).single('file');
+
+/* ROUTES WITH FILES */
+
+/* ROUTES */
 
 /* MONGO DATABASE SETUP */
 const PORT = process.env.PORT || 6001;
