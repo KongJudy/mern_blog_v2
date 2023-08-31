@@ -8,6 +8,7 @@ const multer = require('multer');
 const dotenv = require('dotenv');
 const path = require('path');
 const morgan = require('morgan');
+const { Register } = require('./controllers/auth');
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -37,6 +38,7 @@ const storage = multer.diskStorage({
 const uploadMiddleware = multer({ storage }).single('file');
 
 /* ROUTES WITH FILES */
+app.post('/auth/register', uploadMiddleware, Register);
 
 /* ROUTES */
 
