@@ -8,7 +8,8 @@ const multer = require('multer');
 const dotenv = require('dotenv');
 const path = require('path');
 const morgan = require('morgan');
-const { Register, Login } = require('./controllers/auth');
+const authRoutes = require('./routes/auth');
+const { Register } = require('./controllers/auth');
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -22,8 +23,14 @@ app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use(morgan('common'));
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }));
-app.use(cors());
 app.use('assets', express.static('public/assets'));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true
+  })
+);
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -35,13 +42,13 @@ const storage = multer.diskStorage({
   }
 });
 
-const uploadMiddleware = multer({ storage }).single('file');
+const uploadMiddleware = multer({ storage }).single('picture');
 
 /* ROUTES WITH FILES */
 app.post('/auth/register', uploadMiddleware, Register);
 
 /* ROUTES */
-app.post('/auth/login', Login);
+app.use('/auth', authRoutes);
 
 /* MONGO DATABASE SETUP */
 const PORT = process.env.PORT || 6001;
