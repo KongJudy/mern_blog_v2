@@ -8,7 +8,7 @@ const multer = require('multer');
 const dotenv = require('dotenv');
 const path = require('path');
 const morgan = require('morgan');
-const { Register } = require('./controllers/auth');
+const { Register, Login } = require('./controllers/auth');
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -41,6 +41,7 @@ const uploadMiddleware = multer({ storage }).single('file');
 app.post('/auth/register', uploadMiddleware, Register);
 
 /* ROUTES */
+app.post('/auth/login', Login);
 
 /* MONGO DATABASE SETUP */
 const PORT = process.env.PORT || 6001;
