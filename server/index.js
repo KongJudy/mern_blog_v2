@@ -9,6 +9,7 @@ const dotenv = require('dotenv');
 const path = require('path');
 const morgan = require('morgan');
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/users');
 const { Register } = require('./controllers/auth');
 
 /* CONFIGURATIONS */
@@ -49,6 +50,7 @@ app.post('/auth/register', uploadMiddleware, Register);
 
 /* ROUTES */
 app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
 
 /* MONGO DATABASE SETUP */
 const PORT = process.env.PORT || 6001;
