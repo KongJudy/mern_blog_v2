@@ -10,7 +10,7 @@ module.exports.generateToken = (id) => {
 };
 
 /* REGISTER NEW USER */
-module.exports.Register = async (req, res) => {
+module.exports.register = async (req, res) => {
   try {
     const { firstName, lastName, email, password, picturePath, location } =
       req.body;
@@ -36,7 +36,7 @@ module.exports.Register = async (req, res) => {
 };
 
 /* LOGGING IN */
-module.exports.Login = async (req, res) => {
+module.exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 

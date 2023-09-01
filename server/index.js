@@ -10,7 +10,7 @@ const path = require('path');
 const morgan = require('morgan');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
-const { Register } = require('./controllers/auth');
+const { register } = require('./controllers/auth');
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -46,7 +46,7 @@ const storage = multer.diskStorage({
 const uploadMiddleware = multer({ storage }).single('picture');
 
 /* ROUTES WITH FILES */
-app.post('/auth/register', uploadMiddleware, Register);
+app.post('/auth/register', uploadMiddleware, register);
 
 /* ROUTES */
 app.use('/auth', authRoutes);
