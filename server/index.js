@@ -10,7 +10,10 @@ const path = require('path');
 const morgan = require('morgan');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
+const postRoutes = require('./routes/posts');
 const { register } = require('./controllers/auth');
+const { verifyToken } = require('./middleware/auth');
+const { createPost, editPost } = require('./controllers/posts');
 
 /* CONFIGURATIONS */
 dotenv.config();
@@ -47,10 +50,13 @@ const uploadMiddleware = multer({ storage }).single('picture');
 
 /* ROUTES WITH FILES */
 app.post('/auth/register', uploadMiddleware, register);
+app.post('/posts', verifyToken, uploadMiddleware, createPost);
+app.put('/posts/edit/:id', verifyToken, uploadMiddleware, editPost);
 
 /* ROUTES */
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
+app.use('/posts', postRoutes);
 
 /* MONGO DATABASE SETUP */
 const PORT = process.env.PORT || 6001;
