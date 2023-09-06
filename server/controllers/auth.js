@@ -41,11 +41,11 @@ module.exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: 'Invalid User' });
+    if (!user) return res.status(400).json({ message: 'Invalid User' });
 
     const matchPassword = await bcrypt.compare(password, user.password);
     if (!matchPassword)
-      return res.status(400).json({ msg: 'Invalid Credentials' });
+      return res.status(400).json({ message: 'Invalid Credentials' });
 
     const token = this.generateToken(user._id);
     delete user.password;
