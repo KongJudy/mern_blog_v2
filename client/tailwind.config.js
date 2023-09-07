@@ -7,7 +7,7 @@ module.exports = {
         'light-rose': '#f7e8e8',
         'med-rose': '#edaeae',
         rose: '#e89292',
-        primary: '#4e2626'
+        primary: '#463c3c'
       },
       dropShadow: {
         sm: '0 2px 2px rgba(0, 0, 0, 0.317)',
