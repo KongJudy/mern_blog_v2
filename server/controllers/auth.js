@@ -12,8 +12,12 @@ module.exports.generateToken = (id) => {
 /* REGISTER NEW USER */
 module.exports.register = async (req, res) => {
   try {
-    const { firstName, lastName, email, password, picturePath, location } =
-      req.body;
+    const { firstName, lastName, email, password, location } = req.body;
+
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser)
+      return res.status(400).json({ message: 'User already exists!' });
 
     const salt = await bcrypt.genSalt(12);
     const passwordHash = await bcrypt.hash(password, salt);
@@ -23,9 +27,10 @@ module.exports.register = async (req, res) => {
       lastName,
       email,
       password: passwordHash,
-      picturePath,
-      location
+      location,
+      picturePath: req.file ? req.file.filename : ''
     });
+
     const token = this.generateToken(newUser._id);
     const savedUser = await newUser.save();
 

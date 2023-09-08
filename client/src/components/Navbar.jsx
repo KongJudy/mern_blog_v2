@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { Fade } from 'hamburger-react';
 import { PiPuzzlePieceFill } from 'react-icons/pi';
 
+const API_URL = process.env.REACT_APP_BASE_URL;
+
 const MenuItem = ({ to, label, onClick }) => (
   <div className='hover:bg-primary hover:rounded hover:text-white px-2'>
     {to ? (
@@ -19,6 +21,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [menuOpen, setMenuOpen] = useState(false);
+  const avatar =
+    user && user.picturePath ? `${API_URL}/assets/${user.picturePath}` : null;
 
   const handleLogout = () => {
     dispatch(
@@ -30,7 +34,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='w-full fixed shadow-md bg-white'>
+    <nav className='w-full shadow-md bg-white z-10 fixed'>
       <div className='flex text-2xl px-8'>
         <div className='text-primary py-4 flex'>
           <Link to='/' className='flex'>
@@ -51,7 +55,17 @@ const Navbar = () => {
               <MenuItem to='/' label='Home' />
               {user ? (
                 <>
-                  <MenuItem to='/profile' label={user.firstName} />
+                  <div className='md:flex md:mr-4'>
+                    {avatar ? (
+                      <img
+                        className='hidden md:block rounded-full w-[28px] h-[28px] mt-1'
+                        src={avatar}
+                        alt='user profile'
+                      />
+                    ) : null}
+                    <MenuItem to='/profile/userId' label={user.firstName} />
+                  </div>
+
                   <MenuItem label='Logout' onClick={handleLogout} />
                 </>
               ) : (

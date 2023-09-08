@@ -7,7 +7,7 @@ import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className='bg-light-rose w-screen h-screen'>
+    <div className='bg-light-rose'>
       <BrowserRouter>
         <Navbar />
         <Routes>

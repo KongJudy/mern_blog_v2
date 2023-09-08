@@ -55,7 +55,7 @@ const Login = () => {
   };
 
   return (
-    <div className='flex justify-center p-2'>
+    <div className='flex justify-center p-2 h-screen'>
       <div className='mt-40 text-center w-[600px]'>
         <div className='border-2 border-light-rose h-[500px] bg-white rounded-lg p- drop-shadow-sm'>
           <div className='mt-24'>
