@@ -15,7 +15,7 @@ module.exports = {
         lg: '0 6px 6px rgba(0, 0, 0, 0.651)'
       },
       fontFamily: {
-        playfair: 'Playfair Display',
+        inter: 'Inter',
         serif: 'serif'
       }
     },
@@ -23,7 +23,7 @@ module.exports = {
       xs: '480px',
       sm: '640px',
       md: '768px',
-      lg: '1060px'
+      lg: '1024px'
     }
   },
   plugins: []

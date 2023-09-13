@@ -34,57 +34,57 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='w-full shadow-md bg-white z-10 fixed'>
-      <div className='flex text-2xl px-8'>
-        <div className='text-primary py-4 flex'>
-          <Link to='/' className='flex'>
-            Connect
-            <PiPuzzlePieceFill
-              color='#463c3c'
-              className='mt-1 ml-2 rotate-45'
-            />
-          </Link>
-        </div>
-        <div className='text-2xl mt-2 ml-auto text-primary flex justify-center relative md:mr-20'>
-          <div
-            className={`md:flex md:justify-normal mt-14 text-right rounded absolute right-12 md:bg-white md:mt-0 md:p-0 ${
-              menuOpen ? 'block' : 'hidden'
-            }`}
-          >
-            <div className='md:flex md:gap-4 md:mt-2 md:p-0 p-4 rounded bg-white md:w-[200px] w-full text-center'>
-              <MenuItem to='/' label='Home' />
-              {user ? (
-                <>
-                  <div className='md:flex md:mr-4'>
-                    {avatar ? (
-                      <img
-                        className='hidden md:block rounded-full w-[28px] h-[28px] mt-1'
-                        src={avatar}
-                        alt='user profile'
-                      />
-                    ) : null}
-                    <MenuItem to='/profile/userId' label={user.firstName} />
-                  </div>
+    <nav className='bg-white fixed z-10 w-full flex justify-between py-4 px-6 shadow-md'>
+      <div className='text-primary font-extrabold flex'>
+        <Link to='/' className='flex text-3xl'>
+          Connect
+          <PiPuzzlePieceFill color='#463c3c' className='mt-1 ml-2 rotate-45' />
+        </Link>
+      </div>
+      <div
+        className={`${
+          menuOpen ? 'block' : 'hidden'
+        } md:flex font-bold mt-10 md:mt-0 text-end
+        }`}
+      >
+        <div className='md:flex md:items-center gap-4'>
+          <MenuItem to='/' label='Home' />
+          {user ? (
+            <>
+              <MenuItem to='/createPost' label='Create Post' />
+              <div className='md:flex md:items-center text-right'>
+                {avatar ? (
+                  <img
+                    className='hidden md:block rounded-full w-[28px] h-[28px] mt-1 mr-2 object-cover ring-2 ring-primary'
+                    src={avatar}
+                    alt='user profile'
+                  />
+                ) : null}
+                <div>
+                  <MenuItem
+                    to={`/profile/${user._id}`}
+                    label={user.firstName}
+                  />
+                </div>
+              </div>
 
-                  <MenuItem label='Logout' onClick={handleLogout} />
-                </>
-              ) : (
-                <>
-                  <MenuItem to='/login' label='Login' />
-                  <MenuItem to='/register' label='Register' />
-                </>
-              )}
-            </div>
-          </div>
-          <div className='block md:hidden justify-end items-center'>
-            <Fade
-              size={20}
-              toggled={menuOpen}
-              toggle={setMenuOpen}
-              easing='ease-in'
-            />
-          </div>
+              <MenuItem label='Logout' onClick={handleLogout} />
+            </>
+          ) : (
+            <>
+              <MenuItem to='/login' label='Login' />
+              <MenuItem to='/register' label='Register' />
+            </>
+          )}
         </div>
+      </div>
+      <div className='block md:hidden absolute right-2 top-3'>
+        <Fade
+          size={18}
+          toggled={menuOpen}
+          toggle={setMenuOpen}
+          easing='ease-in'
+        />
       </div>
     </nav>
   );

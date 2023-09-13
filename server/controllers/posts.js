@@ -4,7 +4,7 @@ const User = require('../models/User');
 /* READ */
 module.exports.createPost = async (req, res) => {
   try {
-    const { userId, description, picturePath } = req.body;
+    const { userId, description } = req.body;
 
     const user = await User.findById(userId);
     const newPost = new Post({
@@ -13,7 +13,7 @@ module.exports.createPost = async (req, res) => {
       lastName: user.lastName,
       location: user.location,
       description,
-      picturePath,
+      picturePath: req.file ? req.file.filename : '',
       userPicturePath: user.picturePath,
       likes: {},
       comments: []
