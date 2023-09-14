@@ -103,7 +103,7 @@ const CreatePost = () => {
                 value={inputValues.picturePath}
                 onChange={handlePictureChange}
               />
-              <button className='mt-4 bg-primary w-full rounded-full p-1 text-white'>
+              <button className='mt-4 bg-med-rose text-primary font-bold hover:bg-primary w-full rounded-full p-1 hover:text-white'>
                 POST
               </button>
             </form>

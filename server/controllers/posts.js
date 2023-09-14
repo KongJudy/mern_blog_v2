@@ -28,6 +28,16 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
+module.exports.getSinglePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const singlePost = await Post.findById(id);
+    res.status(200).json(singlePost);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
 module.exports.getFeedPosts = async (req, res) => {
   try {
     const posts = await Post.find();

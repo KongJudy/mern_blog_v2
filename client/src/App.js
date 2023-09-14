@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Navbar from './components/Navbar';
 import CreatePost from './pages/CreatePost';
+import Post from './pages/Post';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/register' element={<Register />} />
           <Route path='/createPost' element={<CreatePost />} />
           <Route path='/profile/:userId' element={<Profile />} />
+          <Route path='/post/:id' element={<Post />} />
         </Routes>
       </BrowserRouter>
     </div>

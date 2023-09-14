@@ -75,11 +75,11 @@ const Register = () => {
   };
 
   return (
-    <div className='py-4 w-screen h-full'>
-      <div className='flex justify-center mt-20 text-center w-screen h-screen'>
-        <div className='h-[700px] bg-white rounded-lg drop-shadow-sm w-[600px]'>
-          <div className='mt-24'>
-            <span className='text-2xl font-bold'>Register</span>
+    <div className='flex justify-center p-2 min-h-screen'>
+      <div className='md:mt-40 mt-16 text-center md:w-[600px] min-w-screen'>
+        <div className='border-2 border-light-rose md:h-[640px] h-full bg-white rounded-lg p- drop-shadow-sm'>
+          <div className='mt-12'>
+            <span className='text-2xl font-bold '>Register</span>
           </div>
 
           <div className='mt-16 mb-10'>
