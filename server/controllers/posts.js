@@ -64,9 +64,17 @@ module.exports.postComment = async (req, res) => {
     const post = await Post.findById(postId);
     if (!post) return res.status(404).json({ message: 'Post Not Found' });
 
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
+    });
+
     const comment = {
       userId,
-      text
+      text,
+      createdAt: formattedDate
     };
 
     post.comments.push(comment);
@@ -123,6 +131,30 @@ module.exports.likePost = async (req, res) => {
     );
 
     res.status(200).json(updatedPost);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+/* DELETE */
+module.exports.deleteComment = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const commentId = req.params.commentId;
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    const commentIndex = post.comments.findIndex(
+      (comment) => comment.userId === commentId
+    );
+
+    post.comments.splice(commentIndex, 1);
+    await post.save();
+
+    res.status(200).json({ message: 'Comment deleted successfully', post });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }

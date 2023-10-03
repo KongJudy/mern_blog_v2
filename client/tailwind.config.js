@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'light-rose': '#f7e8e8',
-        'med-rose': '#edaeae',
-        rose: '#e89292',
+        'light-rose': '#fbf3f3',
+        'med-rose': '#efc9c9',
+        rose: '#f0bebe',
         primary: '#463c3c'
       },
       dropShadow: {

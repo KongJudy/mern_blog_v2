@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setLogout } from '../features/auth/authSlice';
 import { useState } from 'react';
 import { Fade } from 'hamburger-react';
@@ -18,6 +18,7 @@ const MenuItem = ({ to, label, onClick }) => (
 );
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,6 +32,7 @@ const Navbar = () => {
         token: ''
       })
     );
+    navigate('/login');
   };
 
   return (

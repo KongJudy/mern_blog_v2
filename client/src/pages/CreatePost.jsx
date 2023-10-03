@@ -83,13 +83,13 @@ const CreatePost = () => {
 
   return (
     <div className='h-screen'>
-      <div className='flex justify-center text-center '>
+      <div className='flex justify-center text-center p-2'>
         <div className='mt-28 w-[500px] md:w-[700px]'>
           <span className='text-2xl font-bold'>Create Post</span>
           <div className='mt-12'>
             <form onSubmit={handleSubmitForm}>
               <textarea
-                className='w-full rounded p-3 h-[200px]'
+                className='w-full rounded p-3 h-[200px] border-2 border-primary'
                 type='text'
                 name='description'
                 placeholder='Description'

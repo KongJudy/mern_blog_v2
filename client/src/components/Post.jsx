@@ -6,7 +6,7 @@ const Post = ({ post }) => {
   const lessDescription = post.description.slice(0, 190);
 
   return (
-    <div className='mt-10 h-[300px]'>
+    <div className='mt-10 h-[300px] mb-12'>
       <div key={post._id}>
         {post.picturePath && (
           <img
@@ -35,7 +35,11 @@ const Post = ({ post }) => {
         <div className='mt-2'>
           <p>{lessDescription}</p>
           <Link to={`/post/${post._id}`}>
-            <button>READ MORE</button>
+            <div className='text-right'>
+              <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded-full'>
+                READ MORE
+              </button>
+            </div>
           </Link>
         </div>
       </div>

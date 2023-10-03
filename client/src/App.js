@@ -9,19 +9,17 @@ import Post from './pages/Post';
 
 function App() {
   return (
-    <div className='bg-light-rose'>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/createPost' element={<CreatePost />} />
-          <Route path='/profile/:userId' element={<Profile />} />
-          <Route path='/post/:id' element={<Post />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/createPost' element={<CreatePost />} />
+        <Route path='/profile/:userId' element={<Profile />} />
+        <Route path='/post/:id' element={<Post />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

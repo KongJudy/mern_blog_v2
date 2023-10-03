@@ -13,4 +13,5 @@
 html {
   font-family: 'Inter', sans-serif;
   @apply text-primary;
+  @apply bg-light-rose;
 }
