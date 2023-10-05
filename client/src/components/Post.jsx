@@ -19,16 +19,14 @@ const Post = ({ post }) => {
           <time className='text-sm font-bold'>
             {format(new Date(post.createdAt), 'MMM d, yyyy HH:mm')}
           </time>
-          <div className='flex'>
+          <div className='flex text-sm font-bold '>
             <img
               className='rounded-full w-[24px] h-[24px] object-cover ring-1 ring-primary'
               src={`${API_URL}/assets/${post.userPicturePath}`}
               alt='user'
             />
             <Link to={`/${post._id}`}>
-              <span className='ml-2 text-sm font-bold flex'>
-                {post.firstName}
-              </span>
+              <span className='ml-2 flex'>{post.firstName}</span>
             </Link>
           </div>
         </div>
@@ -41,6 +39,10 @@ const Post = ({ post }) => {
               </button>
             </div>
           </Link>
+          <div className='text-right my-2 text-sm font-bold'>
+            {post.comments.length}
+            <span className='mx-2'>Comments</span>
+          </div>
         </div>
       </div>
     </div>

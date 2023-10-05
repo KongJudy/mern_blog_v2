@@ -18,6 +18,7 @@ const Post = () => {
   const [like, setLike] = useState(false);
   const [likesCount, setLikesCount] = useState(0);
   const [comment, setComment] = useState('');
+  const [commentsCount, setCommentsCount] = useState(0);
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
 
@@ -85,6 +86,7 @@ const Post = () => {
         if (fetchedPost.likes[user._id]) {
           setLike(true);
         }
+        setCommentsCount(fetchedPost.comments.length);
         setLikesCount(Object.keys(fetchedPost.likes).length);
       } catch (error) {
         console.log('Error fetching single post: ', error);
@@ -134,10 +136,12 @@ const Post = () => {
               </button>
             )}
           </div>
-          <div className='text-right'>
+          <div className='text-right font-bold text-sm'>
+            {commentsCount}
+            <span className='ml-1 mr-4'>Comments</span>
             <button onClick={handleLikeClick}>
               <div className='flex items-center'>
-                <div className='font-bold text-sm'>{likesCount}</div>
+                {likesCount}
                 <div className='ml-1'>
                   {like ? <PiPuzzlePieceFill size={16} /> : <PiPuzzlePiece />}
                 </div>
