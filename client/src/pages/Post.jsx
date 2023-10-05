@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { PiPuzzlePieceFill, PiPuzzlePiece } from 'react-icons/pi';
+import { FiEdit } from 'react-icons/fi';
 import { setPost } from '../features/auth/authSlice';
 import Comments from '../components/Comments';
 
@@ -11,6 +12,7 @@ const API_URL = process.env.REACT_APP_BASE_URL;
 
 const Post = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [postInfo, setPostInfo] = useState(null);
   const [like, setLike] = useState(false);
@@ -124,6 +126,13 @@ const Post = () => {
           </div>
           <div className='mt-2'>
             <p>{postInfo.description}</p>
+          </div>
+          <div className='text-right mb-2'>
+            {postInfo.firstName === user.firstName && (
+              <button onClick={() => navigate(`/editPost/${postInfo._id}`)}>
+                <FiEdit />
+              </button>
+            )}
           </div>
           <div className='text-right'>
             <button onClick={handleLikeClick}>

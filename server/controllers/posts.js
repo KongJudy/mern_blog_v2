@@ -89,7 +89,7 @@ module.exports.postComment = async (req, res) => {
 /* UPDATE */
 module.exports.editPost = async (req, res) => {
   try {
-    const { userId, description, picturePath } = req.body;
+    const { userId, description } = req.body;
     const { id } = req.params;
 
     const post = await Post.findById(id);
@@ -102,7 +102,10 @@ module.exports.editPost = async (req, res) => {
         .json({ message: 'Unauthorized to edit this post' });
 
     post.description = description;
-    post.picturePath = picturePath;
+
+    if (req.file) {
+      post.picturePath = req.file.filename;
+    }
 
     await post.save();
     res.status(200).json(post);
