@@ -138,7 +138,11 @@ const Post = () => {
           </div>
           <div className='text-right font-bold text-sm'>
             {commentsCount}
-            <span className='ml-1 mr-4'>Comments</span>
+            {commentsCount === 1 ? (
+              <span className='ml-1 mr-4'>Comment</span>
+            ) : (
+              <span className='ml-1 mr-4'>Comments</span>
+            )}
             <button onClick={handleLikeClick}>
               <div className='flex items-center'>
                 {likesCount}

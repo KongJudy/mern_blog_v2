@@ -41,7 +41,11 @@ const Post = ({ post }) => {
           </Link>
           <div className='text-right my-2 text-sm font-bold'>
             {post.comments.length}
-            <span className='mx-2'>Comments</span>
+            {post.comments.length === 1 ? (
+              <span className='mx-2'>Comment</span>
+            ) : (
+              <span className='mx-2'>Comments</span>
+            )}
           </div>
         </div>
       </div>
