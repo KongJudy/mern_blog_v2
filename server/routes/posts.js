@@ -5,7 +5,8 @@ const {
   likePost,
   getSinglePost,
   postComment,
-  deleteComment
+  deleteComment,
+  deletePost
 } = require('../controllers/posts');
 const { verifyToken } = require('../middleware/auth');
 
@@ -23,6 +24,7 @@ router.get('/:userId/posts', verifyToken, getUserPosts);
 router.put('/:id/like', verifyToken, likePost);
 
 /*DELETE */
+router.delete('/:id', verifyToken, deletePost);
 router.delete('/:id/comment/:commentId/', verifyToken, deleteComment);
 
 module.exports = router;

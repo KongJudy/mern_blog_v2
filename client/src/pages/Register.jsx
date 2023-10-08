@@ -81,7 +81,6 @@ const Register = () => {
           <div className='mt-12'>
             <span className='text-2xl font-bold '>Register</span>
           </div>
-
           <div className='mt-16 mb-10'>
             <form onSubmit={handleSubmitForm}>
               <input

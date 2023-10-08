@@ -20,7 +20,6 @@ module.exports.createPost = async (req, res) => {
     });
     await newPost.save();
 
-    /* FIND ALL POSTS */
     const post = await Post.find();
     res.status(200).json(post);
   } catch (error) {
@@ -49,8 +48,15 @@ module.exports.getFeedPosts = async (req, res) => {
 
 module.exports.getUserPosts = async (req, res) => {
   try {
-    const { userId } = req.params;
-    const posts = await Post.findById({ userId });
+    let userId;
+    // get user's posts
+    if (req.params.userId) {
+      userId = req.params.userId;
+      // get logged in user's posts
+    } else {
+      userId = req.userId;
+    }
+    const posts = await Post.find({ userId: userId });
     res.status(200).json(posts);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -140,6 +146,30 @@ module.exports.likePost = async (req, res) => {
 };
 
 /* DELETE */
+module.exports.deletePost = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const { id } = req.params;
+
+    const post = await Post.findById(id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post Not Found' });
+    }
+    console.log('Request userId: ', userId);
+    console.log('Post userId: ', post.userId);
+    console.log('Receieved Token: ', req.headers.authorization);
+    if (post.userId !== userId)
+      return res
+        .status(401)
+        .json({ message: 'Unauthorized to delete this post' });
+
+    await Post.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Post Delete Successfully', post });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports.deleteComment = async (req, res) => {
   try {
     const postId = req.params.id;

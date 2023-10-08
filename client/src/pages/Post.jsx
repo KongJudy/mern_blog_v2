@@ -5,6 +5,8 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { PiPuzzlePieceFill, PiPuzzlePiece } from 'react-icons/pi';
 import { FiEdit } from 'react-icons/fi';
+import { AiFillDelete } from 'react-icons/ai';
+import { FaRegComment } from 'react-icons/fa';
 import { setPost } from '../features/auth/authSlice';
 import Comments from '../components/Comments';
 
@@ -66,11 +68,25 @@ const Post = () => {
           headers: { Authorization: token }
         }
       );
-      // console.log('API Response:', response.data);
 
       setPostInfo(response.data.post);
     } catch (error) {
       console.log('Error deleting comment: ', error);
+    }
+  };
+
+  const handleDeletePost = async () => {
+    try {
+      const response = await axios.delete(`${API_URL}/posts/${id}`, {
+        headers: { Authorization: token },
+        data: { userId: user._id }
+      });
+      setPost(response.data);
+      setTimeout(() => {
+        navigate('/');
+      }, 500);
+    } catch (error) {
+      console.log('Error deleting post: ', error);
     }
   };
 
@@ -119,7 +135,7 @@ const Post = () => {
                 src={`${API_URL}/assets/${postInfo.userPicturePath}`}
                 alt='user'
               />
-              <Link to={`/${postInfo._id}`}>
+              <Link to={`/posts/${postInfo.userId}`}>
                 <span className='ml-2 text-sm font-bold flex'>
                   {postInfo.firstName}
                 </span>
@@ -129,32 +145,31 @@ const Post = () => {
           <div className='mt-2'>
             <p>{postInfo.description}</p>
           </div>
-          <div className='text-right mb-2'>
-            {postInfo.firstName === user.firstName && (
+          {postInfo.firstName === user.firstName && (
+            <div className='text-right mb-2'>
               <button onClick={() => navigate(`/editPost/${postInfo._id}`)}>
                 <FiEdit />
               </button>
-            )}
-          </div>
-          <div className='text-right font-bold text-sm'>
+              <button className='ml-2' onClick={handleDeletePost}>
+                <AiFillDelete />
+              </button>
+            </div>
+          )}
+          <div className='flex justify-end gap-2 font-bold text-sm'>
             {commentsCount}
-            {commentsCount === 1 ? (
-              <span className='ml-1 mr-4'>Comment</span>
-            ) : (
-              <span className='ml-1 mr-4'>Comments</span>
-            )}
+            <FaRegComment size={12} className='mt-1' />
+            {likesCount}
             <button onClick={handleLikeClick}>
-              <div className='flex items-center'>
-                {likesCount}
-                <div className='ml-1'>
-                  {like ? <PiPuzzlePieceFill size={16} /> : <PiPuzzlePiece />}
-                </div>
-              </div>
+              {like ? (
+                <PiPuzzlePieceFill className='rotate-45' size={16} />
+              ) : (
+                <PiPuzzlePiece className='rotate-45' />
+              )}
             </button>
           </div>
           <div>
-            <span>COMMENTS</span>
-            <div className='w-full border-2 border-primary rounded p-2'>
+            <span className='font-bold'>COMMENTS</span>
+            <div className='mt-2 w-full border-2 border-primary rounded p-2'>
               <form onSubmit={handleFormSubmit} className='p-2'>
                 <textarea
                   className='w-full p-2 h-[100px]'

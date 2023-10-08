@@ -3,8 +3,8 @@ const User = require('../models/User');
 /* READ */
 module.exports.getUser = async (req, res) => {
   try {
-    const { id } = req.params;
-    const user = await User.findById(id);
+    const { userId } = req.params;
+    const user = await User.findById(userId);
     res.status(200).json(user);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -39,8 +39,8 @@ module.exports.addRemoveFriend = async (req, res) => {
 
     /* REMOVE FRIEND */
     if (user.friends.includes(friendId)) {
-      user.friends = user.friends.filter((id) => id !== friendId);
-      friend.friends = friend.friends.filter((id) => id !== id);
+      user.friends = user.friends.filter((friendId) => friendId !== friendId);
+      friend.friends = friend.friends.filter((userId) => userId !== id);
     } else {
       /* ADD FRIEND */
       user.friends.push(friendId);

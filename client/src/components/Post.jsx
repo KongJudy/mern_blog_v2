@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
+import { FaRegComment } from 'react-icons/fa';
 
-const Post = ({ post }) => {
-  const API_URL = process.env.REACT_APP_BASE_URL;
+const Post = ({ API_URL, post }) => {
   const lessDescription = post.description.slice(0, 190);
 
   return (
@@ -25,27 +25,26 @@ const Post = ({ post }) => {
               src={`${API_URL}/assets/${post.userPicturePath}`}
               alt='user'
             />
-            <Link to={`/${post._id}`}>
+            <Link to={`/posts/${post.userId}`}>
               <span className='ml-2 flex'>{post.firstName}</span>
             </Link>
           </div>
         </div>
+        <div className='flex justify-end text-xs font-bold mt-2'>
+          <span>{post.location}</span>
+        </div>
         <div className='mt-2'>
           <p>{lessDescription}</p>
           <Link to={`/post/${post._id}`}>
-            <div className='text-right'>
+            <div className='text-right mt-2'>
               <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded-full'>
                 READ MORE
               </button>
             </div>
           </Link>
-          <div className='text-right my-2 text-sm font-bold'>
+          <div className='flex justify-end gap-2 my-2 text-sm font-bold'>
             {post.comments.length}
-            {post.comments.length === 1 ? (
-              <span className='mx-2'>Comment</span>
-            ) : (
-              <span className='mx-2'>Comments</span>
-            )}
+            <FaRegComment size={12} className='mt-1' />
           </div>
         </div>
       </div>

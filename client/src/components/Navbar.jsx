@@ -63,10 +63,7 @@ const Navbar = () => {
                   />
                 ) : null}
                 <div>
-                  <MenuItem
-                    to={`/profile/${user._id}`}
-                    label={user.firstName}
-                  />
+                  <MenuItem to={`/user/${user._id}`} label={user.firstName} />
                 </div>
               </div>
 
