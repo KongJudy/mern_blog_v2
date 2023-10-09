@@ -18,14 +18,10 @@ const Register = () => {
 
   const handleOnChangeInput = (e) => {
     const { name, value } = e.target;
-    let formattedValue = value;
-    if (name === 'firstName' || name === 'lastName' || name === 'location') {
-      formattedValue =
-        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
-    }
+
     setInputValues({
       ...inputValues,
-      [name]: formattedValue
+      [name]: value
     });
   };
 
@@ -52,9 +48,21 @@ const Register = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('firstName', inputValues.firstName);
-    formData.append('lastName', inputValues.lastName);
-    formData.append('location', inputValues.location);
+    formData.append(
+      'firstName',
+      inputValues.firstName.charAt(0).toUpperCase() +
+        inputValues.firstName.slice(1).toLowerCase()
+    );
+    formData.append(
+      'lastName',
+      inputValues.lastName.charAt(0).toUpperCase() +
+        inputValues.lastName.slice(1).toLowerCase()
+    );
+    formData.append(
+      'location',
+      inputValues.location.charAt(0).toUpperCase() +
+        inputValues.location.slice(1).toLowerCase()
+    );
     formData.append('email', inputValues.email);
     formData.append('password', inputValues.password);
     if (picturePath) {
