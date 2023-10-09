@@ -18,9 +18,14 @@ const Register = () => {
 
   const handleOnChangeInput = (e) => {
     const { name, value } = e.target;
+    let formattedValue = value;
+    if (name === 'firstName' || name === 'lastName' || name === 'location') {
+      formattedValue =
+        value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+    }
     setInputValues({
       ...inputValues,
-      [name]: value
+      [name]: formattedValue
     });
   };
 
