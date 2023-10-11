@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { FaRegComment } from 'react-icons/fa';
+import ButtonSmall from './ButtonSmall';
 
 const Post = ({ API_URL, post, user }) => {
   const lessDescription = post.description.slice(0, 170);
@@ -44,15 +45,13 @@ const Post = ({ API_URL, post, user }) => {
           {user && user._id ? (
             <Link to={`/post/${post._id}`}>
               <div className='text-right mt-2'>
-                <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded-full hover:bg-primary hover:text-white'>
-                  READ MORE
-                </button>
+                <ButtonSmall label='READ MORE' />
               </div>
             </Link>
           ) : (
             <Link to='/login'>
               <div className='text-right mt-2'>
-                <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded-full hover:bg-primary hover:text-white'>
+                <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded hover:bg-primary hover:text-white'>
                   LOGIN TO READ MORE
                 </button>
               </div>

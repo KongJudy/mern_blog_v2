@@ -5,14 +5,14 @@ const Button = ({ label, onClick, to }) => {
     <div>
       {to ? (
         <Link
-          className='bg-med-rose text-primary font-bold hover:bg-primary rounded px-2 py-1 hover:text-white'
+          className='border-2 border-primary text-primary font-bold hover:bg-primary rounded px-2 py-1 hover:text-white'
           to={to}
         >
           {label}
         </Link>
       ) : (
         <button
-          className='bg-med-rose text-primary font-bold hover:bg-primary rounded px-2 py-1 hover:text-white'
+          className='border-2 border-primary text-primary font-bold hover:bg-primary rounded px-2 py-1 hover:text-white'
           onClick={onClick}
         >
           {label}

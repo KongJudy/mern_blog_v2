@@ -42,14 +42,14 @@ const UserProfileData = ({
           isFriend ? (
             <button
               onClick={handleConnectFriend}
-              className='mt-1 bg-primary font-bold text-white rounded-full px-2 py-1 hover:bg-med-rose hover:text-primary'
+              className='mt-1 bg-primary font-bold text-white rounded px-2 py-1 hover:bg-light-rose hover:text-primary'
             >
               Connected
             </button>
           ) : (
             <button
               onClick={handleConnectFriend}
-              className='mt-1 bg-med-rose text-primary font-bold hover:bg-primary w-[60%] rounded-full p-1 hover:text-white'
+              className='mt-1 bg-light-rose border-2 border-primary text-primary font-bold hover:bg-primary w-[60%] rounded p-1 hover:text-white'
             >
               Connect
             </button>

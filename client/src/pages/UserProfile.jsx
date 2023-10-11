@@ -92,10 +92,7 @@ const UserProfile = () => {
           <div className='mb-2'>
             <Button label='Your Posts' onClick={() => handleDisplay('User')} />
           </div>
-          <Button
-            label='Friends Posts'
-            onClick={() => handleDisplay('Friends')}
-          />
+          <Button label='Your Feed' onClick={() => handleDisplay('Friends')} />
         </div>
         {showConnections && (
           <div className='mt-10'>
@@ -117,7 +114,7 @@ const UserProfile = () => {
             <div className='grid grid-cols-1 gap-28 md:gap-16'>
               {currentUserPosts.map((post) => (
                 <div key={post._id}>
-                  <Post post={post} API_URL={API_URL} />
+                  <Post post={post} API_URL={API_URL} user={user} />
                 </div>
               ))}
             </div>
@@ -126,12 +123,12 @@ const UserProfile = () => {
         {showFriendsPosts && (
           <div className='mt-10'>
             <div className='text-center'>
-              <span className='font-bold text-2xl mt-4'>Friends Posts</span>
+              <span className='font-bold text-2xl mt-4'>Your Feed</span>
             </div>
             <div className='grid grid-cols-1 gap-28 md:gap-16'>
               {friendsPosts.map((post) => (
                 <div key={post._id}>
-                  <Post post={post} API_URL={API_URL} />
+                  <Post post={post} API_URL={API_URL} user={user} />
                 </div>
               ))}
             </div>

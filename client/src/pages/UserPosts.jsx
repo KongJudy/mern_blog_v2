@@ -86,7 +86,7 @@ const UserPosts = () => {
             <div className='grid grid-cols-1'>
               {userPosts.map((post) => (
                 <div key={post._id}>
-                  <Post post={post} API_URL={API_URL} />
+                  <Post post={post} API_URL={API_URL} user={user} />
                 </div>
               ))}
             </div>

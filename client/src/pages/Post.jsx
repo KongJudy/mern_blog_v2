@@ -185,7 +185,7 @@ const Post = () => {
                 <div className='text-right mt-2'>
                   <button
                     type='submit'
-                    className='border-2 border-primary rounded-full py-1 px-3 text-sm font-bold'
+                    className='border-2 border-primary rounded py-1 px-2 text-sm font-bold hover:bg-primary hover:text-white'
                   >
                     Post Comment
                   </button>
