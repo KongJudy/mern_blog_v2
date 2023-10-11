@@ -63,6 +63,21 @@ module.exports.getUserPosts = async (req, res) => {
   }
 };
 
+module.exports.getFriendsPosts = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId);
+    const friendsIds = user.friends;
+    const friendsPosts = await Post.find({ userId: { $in: friendsIds } }).sort({
+      createdAt: -1
+    });
+
+    res.status(200).json(friendsPosts);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 module.exports.postComment = async (req, res) => {
   try {
     const { userId, postId, text } = req.body;

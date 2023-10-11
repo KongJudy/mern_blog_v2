@@ -39,23 +39,28 @@ const UserPosts = () => {
           headers: { Authorization: token }
         });
         setUserData(response.data);
+
+        if (!isFriend) {
+          const isFriend = response.data.friends.includes(user._id);
+          setIsFriend(isFriend);
+        }
       } catch (error) {
         console.log('Error fecthing user data: ', error.response);
       }
     };
     fetchUserPosts();
     fetchUserData();
-  }, [token, userId]);
+  }, [token, userId, isFriend, user._id]);
 
   const handleConnectFriend = async () => {
     try {
-      await axios.put(`${API_URL}/users/${user._id}/${userId}`, null, {
-        headers: { Authorization: token }
-      });
-
-      const response = await axios.get(`${API_URL}/users/${user._id}/friends`, {
-        headers: { Authorization: token }
-      });
+      const response = await axios.put(
+        `${API_URL}/users/${user._id}/${userId}`,
+        null,
+        {
+          headers: { Authorization: token }
+        }
+      );
       dispatch(setFriends({ friends: response.data }));
       setIsFriend(!isFriend);
     } catch (error) {
@@ -78,7 +83,7 @@ const UserPosts = () => {
             />
           </div>
           <div className='w-[98%]'>
-            <div className='grid grid-cols-1 gap-28 '>
+            <div className='grid grid-cols-1'>
               {userPosts.map((post) => (
                 <div key={post._id}>
                   <Post post={post} API_URL={API_URL} />

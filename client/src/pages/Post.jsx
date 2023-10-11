@@ -98,7 +98,6 @@ const Post = () => {
         });
         const fetchedPost = response.data;
         setPostInfo(fetchedPost);
-
         if (fetchedPost.likes[user._id]) {
           setLike(true);
         }
@@ -143,7 +142,11 @@ const Post = () => {
             </div>
           </div>
           <div className='mt-2'>
-            <p>{postInfo.description}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: postInfo.description.replace(/\r\n/g, '<br />')
+              }}
+            />
           </div>
           {postInfo.firstName === user.firstName && (
             <div className='text-right mb-2'>

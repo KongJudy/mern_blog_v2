@@ -2,8 +2,8 @@ import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import { FaRegComment } from 'react-icons/fa';
 
-const Post = ({ API_URL, post }) => {
-  const lessDescription = post.description.slice(0, 190);
+const Post = ({ API_URL, post, user }) => {
+  const lessDescription = post.description.slice(0, 170);
 
   return (
     <div className='mt-10 h-[300px] mb-12'>
@@ -25,23 +25,40 @@ const Post = ({ API_URL, post }) => {
               src={`${API_URL}/assets/${post.userPicturePath}`}
               alt='user'
             />
-            <Link to={`/posts/${post.userId}`}>
-              <span className='ml-2 flex'>{post.firstName}</span>
-            </Link>
+            {user && user._id ? (
+              <Link to={`/posts/${post.userId}`}>
+                <span className='ml-2 flex'>{post.firstName}</span>
+              </Link>
+            ) : (
+              <Link to='/login'>
+                <span className='ml-2 flex'>{post.firstName}</span>
+              </Link>
+            )}
           </div>
         </div>
         <div className='flex justify-end text-xs font-bold mt-2'>
           <span>{post.location}</span>
         </div>
         <div className='mt-2'>
-          <p>{lessDescription}</p>
-          <Link to={`/post/${post._id}`}>
-            <div className='text-right mt-2'>
-              <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded-full'>
-                READ MORE
-              </button>
-            </div>
-          </Link>
+          <p>{lessDescription}...</p>
+          {user && user._id ? (
+            <Link to={`/post/${post._id}`}>
+              <div className='text-right mt-2'>
+                <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded-full hover:bg-primary hover:text-white'>
+                  READ MORE
+                </button>
+              </div>
+            </Link>
+          ) : (
+            <Link to='/login'>
+              <div className='text-right mt-2'>
+                <button className='border-primary border-2 py-1 px-2 text-xs font-bold rounded-full hover:bg-primary hover:text-white'>
+                  LOGIN TO READ MORE
+                </button>
+              </div>
+            </Link>
+          )}
+
           <div className='flex justify-end gap-2 my-2 text-sm font-bold'>
             {post.comments.length}
             <FaRegComment size={12} className='mt-1' />

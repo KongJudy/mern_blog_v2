@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import { setPosts } from '../features/auth/authSlice';
+import Button from '../components/Button';
 
 const API_URL = process.env.REACT_APP_BASE_URL;
 
@@ -82,9 +83,9 @@ const CreatePost = () => {
   };
 
   return (
-    <div className='h-screen'>
+    <div className='min-h-screen'>
       <div className='flex justify-center text-center p-2'>
-        <div className='mt-28 w-[500px] md:w-[700px]'>
+        <div className='mt-28 md:w-[700px]'>
           <span className='text-2xl font-bold'>Create Post</span>
           <div className='mt-12'>
             <form onSubmit={handleSubmitForm}>
@@ -103,9 +104,9 @@ const CreatePost = () => {
                 value={inputValues.picturePath}
                 onChange={handlePictureChange}
               />
-              <button className='mt-4 bg-med-rose text-primary font-bold hover:bg-primary w-full rounded-full p-1 hover:text-white'>
-                POST
-              </button>
+              <div className='mt-4'>
+                <Button label='Post' />
+              </div>
             </form>
           </div>
         </div>

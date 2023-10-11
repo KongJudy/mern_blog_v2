@@ -15,16 +15,10 @@ module.exports.getUserFriends = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
+    const friendsIds = user.friends;
+    const userFriends = await User.find({ _id: { $in: friendsIds } });
 
-    const friends = await Promise.all(
-      user.friends.map((id) => User.findById(id))
-    );
-    const formattedFriends = friends.map(
-      ({ _id, firstName, lastName, location, picturePath }) => {
-        return { _id, firstName, lastName, location, picturePath };
-      }
-    );
-    res.status(200).json(formattedFriends);
+    res.status(200).json(userFriends);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -39,25 +33,17 @@ module.exports.addRemoveFriend = async (req, res) => {
 
     /* REMOVE FRIEND */
     if (user.friends.includes(friendId)) {
-      user.friends = user.friends.filter((friendId) => friendId !== friendId);
-      friend.friends = friend.friends.filter((userId) => userId !== id);
+      user.friends = user.friends.filter((id) => id !== friendId);
+      friend.friends = friend.friends.filter((friendId) => friendId !== id);
     } else {
       /* ADD FRIEND */
       user.friends.push(friendId);
       friend.friends.push(id);
     }
-    await user.save();
-    await friend.save();
+    const savedUser = await user.save();
+    const savedFriend = await friend.save();
 
-    const friends = await Promise.all(
-      user.friends.map((id) => User.findById(id))
-    );
-    const formattedFriends = friends.map(
-      ({ _id, firstName, lastName, location, picturePath }) => {
-        return { _id, firstName, lastName, location, picturePath };
-      }
-    );
-    res.status(200).json(formattedFriends);
+    res.status(200).json({ savedUser, savedFriend });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

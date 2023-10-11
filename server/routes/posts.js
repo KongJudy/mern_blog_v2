@@ -6,7 +6,8 @@ const {
   getSinglePost,
   postComment,
   deleteComment,
-  deletePost
+  deletePost,
+  getFriendsPosts
 } = require('../controllers/posts');
 const { verifyToken } = require('../middleware/auth');
 
@@ -16,9 +17,10 @@ const router = express.Router();
 router.post('/:id/comment', verifyToken, postComment);
 
 /* READ */
-router.get('/', verifyToken, getFeedPosts);
+router.get('/', getFeedPosts);
 router.get('/:id', verifyToken, getSinglePost);
 router.get('/:userId/posts', verifyToken, getUserPosts);
+router.get('/:userId/friendsPosts', verifyToken, getFriendsPosts);
 
 /* UPDATE */
 router.put('/:id/like', verifyToken, likePost);
