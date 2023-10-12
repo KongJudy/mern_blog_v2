@@ -14,7 +14,7 @@ const UserProfileData = ({
   const currentUser = user._id === userData._id;
 
   return (
-    <div className='mt-10 flex justify-center border-2 border-primary rounded p-6'>
+    <div className='my-20 flex justify-center border-2 border-primary rounded p-6'>
       <div className='font-bold text-center'>
         <div className='flex gap-4 justify-center'>
           <img

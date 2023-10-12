@@ -40,8 +40,10 @@ const UserProfile = () => {
             headers: { Authorization: token }
           }
         );
-        setFriendsInfo(response.data);
-        console.log(response.data);
+        const sortedFriends = response.data.sort((a, b) =>
+          a.firstName.localeCompare(b.firstName)
+        );
+        setFriendsInfo(sortedFriends);
       } catch (error) {
         console.log('Error fetching user friends: ', error);
       }
@@ -82,7 +84,7 @@ const UserProfile = () => {
 
   return (
     <div className='flex justify-center min-h-screen'>
-      <div className='mt-20 w-[94%] lg:w-[40%]'>
+      <div className='my-20 w-[94%] lg:w-[40%]'>
         <div className='lg:flex lg:justify-center lg:gap-4 text-center mt-4'>
           <div className='mb-2'>
             <Button
@@ -96,14 +98,14 @@ const UserProfile = () => {
           <Button label='Your Feed' onClick={() => handleDisplay('Friends')} />
         </div>
         {showConnections && (
-          <div className='mt-10 flex justify-center'>
+          <div className='mt-10 text-center'>
             <div>
               <span className='font-bold text-2xl mt-4'>Your Connections</span>
-              <div className='text-center mt-4'>
+              <div className='flex justify-center gap-4 mt-4'>
                 {friendsInfo.map((friend) => (
                   <div key={friend._id}>
                     <Link
-                      className='hover:font-bold'
+                      className='font-bold border border-primary p-1 rounded hover:bg-primary hover:text-white'
                       to={`/posts/${friend._id}`}
                     >
                       {friend.firstName}, {friend.location}
