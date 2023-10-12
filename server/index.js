@@ -46,8 +46,6 @@ const storage = multer.diskStorage({
   }
 });
 
-app.use('/assets', express.static('public/assets'));
-
 const uploadMiddleware = multer({ storage }).single('picture');
 
 /* ROUTES WITH FILES */
