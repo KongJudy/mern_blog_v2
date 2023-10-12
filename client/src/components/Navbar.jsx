@@ -36,7 +36,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className='bg-white fixed z-10 w-full flex justify-between py-4 px-6 shadow-md'>
+    <nav className='bg-white fixed z-10 w-full flex justify-between py-4 px-6 drop-shadow-sm'>
       <div className='text-primary font-extrabold flex'>
         <Link to='/' className='flex text-3xl'>
           Connect

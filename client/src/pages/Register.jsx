@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 const API_URL = process.env.REACT_APP_BASE_URL;
@@ -90,67 +90,73 @@ const Register = () => {
   return (
     <div className='flex justify-center p-2 min-h-screen'>
       <div className='md:mt-40 mt-16 text-center md:w-[600px] min-w-screen'>
-        <div className='border-2 border-light-rose md:h-[640px] h-full bg-white rounded-lg p- drop-shadow-sm'>
-          <div className='mt-12'>
+        <div className='border-2 border-light-rose bg-white rounded-lg p- drop-shadow-sm'>
+          <div className='my-12'>
             <span className='text-2xl font-bold '>Register</span>
-          </div>
-          <div className='mt-16 mb-10'>
-            <form onSubmit={handleSubmitForm}>
-              <input
-                className='mt-4 rounded-full p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary'
-                type='text'
-                name='firstName'
-                placeholder='First Name'
-                value={inputValues.firstName}
-                onChange={handleOnChangeInput}
-              />
-              <input
-                className='mt-4 rounded-full p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary'
-                type='text'
-                name='lastName'
-                placeholder='Last Name'
-                value={inputValues.lastName}
-                onChange={handleOnChangeInput}
-              />
-              <input
-                className='mt-4 rounded-full p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary'
-                type='text'
-                name='location'
-                placeholder='Location'
-                value={inputValues.location}
-                onChange={handleOnChangeInput}
-              />
-              <div className='mt-4 p-2 text-center w-[90%] md:w-2/3 mx-auto'>
-                Avatar:
+            <div className='mt-16 mb-10'>
+              <form onSubmit={handleSubmitForm}>
                 <input
-                  className='p-1.5 w-full'
-                  type='file'
-                  name='picturePath'
-                  onChange={handleAvatarChange}
+                  className='mt-4 rounded p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary drop-shadow-sm'
+                  type='text'
+                  name='firstName'
+                  placeholder='First Name'
+                  value={inputValues.firstName}
+                  onChange={handleOnChangeInput}
                 />
-              </div>
-              <input
-                className='mt-4 rounded-full p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary'
-                type='text'
-                name='email'
-                placeholder='Email'
-                value={inputValues.email}
-                onChange={handleOnChangeInput}
-              />
-              <input
-                className='mt-4 rounded-full p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary'
-                type='password'
-                name='password'
-                placeholder='Password'
-                value={inputValues.password}
-                onChange={handleOnChangeInput}
-              />
-              <div className='mt-6 bg-med-rose rounded-full p-1.5 w-[90%] md:w-2/3 mx-auto hover:bg-primary hover:text-white'>
-                <button type='submit' className='font-bold tracking-widest'>
-                  Register
-                </button>
-              </div>
-            </form>
+                <input
+                  className='mt-4 rounded p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary drop-shadow-sm'
+                  type='text'
+                  name='lastName'
+                  placeholder='Last Name'
+                  value={inputValues.lastName}
+                  onChange={handleOnChangeInput}
+                />
+                <input
+                  className='mt-4 rounded p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary drop-shadow-sm'
+                  type='text'
+                  name='location'
+                  placeholder='Location'
+                  value={inputValues.location}
+                  onChange={handleOnChangeInput}
+                />
+                <div className='mt-4 p-2 text-center w-[90%] md:w-2/3 mx-auto'>
+                  Avatar:
+                  <input
+                    className='p-1.5 w-full'
+                    type='file'
+                    name='picturePath'
+                    onChange={handleAvatarChange}
+                  />
+                </div>
+                <input
+                  className='mt-4 rounded p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary drop-shadow-sm'
+                  type='text'
+                  name='email'
+                  placeholder='Email'
+                  value={inputValues.email}
+                  onChange={handleOnChangeInput}
+                />
+                <input
+                  className='mt-4 rounded p-1.5 w-[90%] md:w-2/3 text-center border-2 border-light-rose outline-primary drop-shadow-sm'
+                  type='password'
+                  name='password'
+                  placeholder='Password'
+                  value={inputValues.password}
+                  onChange={handleOnChangeInput}
+                />
+                <div className='mt-6 bg-med-rose rounded p-1.5 w-[90%] md:w-2/3 mx-auto hover:bg-primary hover:text-white drop-shadow-sm'>
+                  <button type='submit' className='font-bold tracking-widest'>
+                    Register
+                  </button>
+                </div>
+                <div className='flex justify-center gap-2 mt-4'>
+                  <h1>Already have an account?</h1>
+                  <Link to='/login' className='font-bold'>
+                    Login
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

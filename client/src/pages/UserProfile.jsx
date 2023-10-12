@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import Post from '../components/Post';
 import axios from 'axios';
 import Button from '../components/Button';
+import { Link } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_BASE_URL;
 
@@ -95,14 +96,21 @@ const UserProfile = () => {
           <Button label='Your Feed' onClick={() => handleDisplay('Friends')} />
         </div>
         {showConnections && (
-          <div className='mt-10'>
-            <span>Your Connections:</span>
+          <div className='mt-10 flex justify-center'>
             <div>
-              {friendsInfo.map((friend) => (
-                <div key={friend._id}>
-                  {friend.firstName}, {friend.location}
-                </div>
-              ))}
+              <span className='font-bold text-2xl mt-4'>Your Connections</span>
+              <div className='text-center mt-4'>
+                {friendsInfo.map((friend) => (
+                  <div key={friend._id}>
+                    <Link
+                      className='hover:font-bold'
+                      to={`/posts/${friend._id}`}
+                    >
+                      {friend.firstName}, {friend.location}
+                    </Link>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}

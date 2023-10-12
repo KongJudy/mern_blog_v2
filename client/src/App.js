@@ -8,6 +8,7 @@ import Post from './pages/Post';
 import EditPost from './pages/EditPost';
 import UserPosts from './pages/UserPosts';
 import UserProfile from './pages/UserProfile';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/editPost/:id' element={<EditPost />} />
         <Route path='/posts/:userId' element={<UserPosts />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
