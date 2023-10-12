@@ -35,7 +35,6 @@ app.use(
     credentials: true
   })
 );
-app.use('/assets', express.static('public/assets'));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
@@ -46,6 +45,8 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   }
 });
+
+app.use('/assets', express.static('public/assets'));
 
 const uploadMiddleware = multer({ storage }).single('picture');
 
