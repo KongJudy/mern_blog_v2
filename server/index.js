@@ -35,6 +35,7 @@ app.use(
     credentials: true
   })
 );
+app.use('/assets', express.static('public/assets'));
 
 /* FILE STORAGE */
 const storage = multer.diskStorage({
